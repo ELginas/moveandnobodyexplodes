@@ -1,8 +1,10 @@
 extends Control
 
+const PLAY_SCENE = preload("res://Scenes/Level1.tscn")
+
 
 func play_game():
-	pass
+	get_tree().change_scene_to(PLAY_SCENE)
 
 
 func exit_game():
