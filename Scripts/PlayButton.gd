@@ -28,7 +28,6 @@ func move():
 	var new_position = rect_position
 	var direction = (get_true_pos(new_position) - mouse_position).normalized()
 	while is_in_area(new_position, mouse_position, 5):
-		print(direction)
 		new_position += direction
 	rect_position = new_position
 
