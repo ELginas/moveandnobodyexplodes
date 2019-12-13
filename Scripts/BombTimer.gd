@@ -2,7 +2,7 @@ extends Label
 
 const DEFUSED_COLOR = Color8(71, 232, 71)
 
-export(int) var bomb_seconds = 80
+export(int) var bomb_seconds = 90
 
 var current_seconds
 
@@ -34,10 +34,7 @@ func update_time():
 			sec_time -= 60
 		
 		if current_seconds <= 0:
-			counted = true
-			var texty = "0:00"
-			text = texty
-			get_tree().get_nodes_in_group("Bomb")[0].set_text(texty)
+			explode()
 			return
 		
 		var sec_text
@@ -63,3 +60,12 @@ func defused():
 	defused = true
 	get_tree().get_nodes_in_group("Bomb")[0].set_text_color(DEFUSED_COLOR)
 	add_color_override("font_color", DEFUSED_COLOR)
+
+
+func explode():
+	counted = true
+	var texty = "0:00"
+	text = texty
+	var bomb = get_tree().get_nodes_in_group("Bomb")[0]
+	bomb.set_text(texty)
+	bomb.explode()

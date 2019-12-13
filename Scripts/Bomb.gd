@@ -1,13 +1,20 @@
 extends Node2D
 
-const defuse_time = 5
+const NEXT_LEVEL_ID = 0
+
+const DEFUSE_TIME = 5
+const RESTART_TIME = 3
+const NEXT_TIME = 3
 
 var mouse_entered = false
 var player_nearby = false
 var defusing = false
 var defused = false
+var exploded = false
 
 var current_defuse_time = 0
+var current_restart_time = 0
+var current_next_time = 0
 
 
 func _ready():
@@ -16,7 +23,7 @@ func _ready():
 
 
 func _process(delta):
-	if mouse_entered and not defused:
+	if mouse_entered and not defused and not exploded:
 		if player_nearby:
 			if Input.is_action_just_pressed("defuse"):
 				defusing = true
@@ -24,7 +31,7 @@ func _process(delta):
 			
 			if Input.is_action_pressed("defuse"):
 				current_defuse_time += delta
-				$Progress.value = $Progress.max_value / 100 * (current_defuse_time * (100 / defuse_time))
+				$Progress.value = $Progress.max_value / 100 * (current_defuse_time * (100 / DEFUSE_TIME))
 			elif defusing:
 				defusing = false
 				$Progress.visible = false
@@ -39,6 +46,26 @@ func _process(delta):
 			defusing = false
 			$Progress.visible = false
 			current_defuse_time = 0
+	elif exploded:
+		current_restart_time += delta
+		if current_restart_time >= RESTART_TIME:
+			get_tree().reload_current_scene()
+	elif defused:
+		current_next_time += delta
+		if current_next_time >= NEXT_TIME:
+			if NEXT_LEVEL_ID != 0:
+				get_tree().change_scene("res://Scenes/Level"+str(NEXT_LEVEL_ID))
+			else:
+				pass
+
+
+func explode():
+	exploded = true
+	$Explosion.visible = true
+	$Explosion.play("Explosion")
+	$Sprite.visible = false
+	$TimeText.visible = false
+	$Progress.visible = false
 
 
 func set_text(text):

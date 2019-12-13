@@ -47,19 +47,20 @@ func get_back(delta):
 	var mpos = starting_pos
 	var destination = rect_position
 	
-	repos.x = mpos.x - destination.x
-	repos.y = mpos.y - destination.y
-	repos_velo.x = repos.x * SMOOTH_SPEED * delta
-	repos_velo.y = repos.y * SMOOTH_SPEED * delta
-	
-	position.x += repos_velo.x
-	position.y += repos_velo.y
-	
-	rect_position += repos_velo
+	if mpos != destination:
+		repos.x = mpos.x - destination.x
+		repos.y = mpos.y - destination.y
+		repos_velo.x = repos.x * SMOOTH_SPEED * delta
+		repos_velo.y = repos.y * SMOOTH_SPEED * delta
+		
+		position.x += repos_velo.x
+		position.y += repos_velo.y
+		
+		rect_position += repos_velo
 
 
 func _process(delta):
 	if mouse_entered:
 		move()
-	elif not is_in_area(rect_position, get_global_mouse_position(), 100):
-		get_back(delta)
+	#elif not is_in_area(rect_position, get_global_mouse_position(), 100):
+	#	get_back(delta)
