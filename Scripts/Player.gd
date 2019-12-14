@@ -9,6 +9,10 @@ const JUMP_FORCE = 400
 const GRAVITY = 20
 const MAX_FALL_SPEED = 400
 
+const AFK_TIME = 1
+
+var current_afk_time = 0
+
 var y_velo = 0
 
 func _ready():
@@ -22,6 +26,7 @@ func _physics_process(delta):
 		move_dir += 1
 	if Input.is_action_pressed("ui_left"):
 		move_dir -= 1
+	
 	move_and_slide(Vector2(move_dir * MOVE_SPEED, y_velo), Vector2(0, -1))
 	
 	var grounded = is_on_floor()
@@ -37,6 +42,12 @@ func _physics_process(delta):
 		flip()
 	if !isRight and move_dir > 0:
 		flip()
+	
+	if move_dir == 0 and grounded:
+		current_afk_time += delta
+		if current_afk_time >= AFK_TIME:
+			reset_pos()
+			current_afk_time = 0
 	
 	if grounded:
 		if move_dir == 0:
