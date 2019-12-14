@@ -32,6 +32,7 @@ current = true
 
 [node name="Bomb" parent="." instance=ExtResource( 4 )]
 position = Vector2( 57, 338.07 )
+NEXT_LEVEL_ID = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1

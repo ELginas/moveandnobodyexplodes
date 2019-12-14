@@ -15,7 +15,7 @@
 size = 60
 font_data = ExtResource( 9 )
 
-[node name="Level1" type="Node2D"]
+[node name="Level2" type="Node2D"]
 
 [node name="KillBarrier" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 504.66 )

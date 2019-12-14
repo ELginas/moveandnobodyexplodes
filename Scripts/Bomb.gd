@@ -1,6 +1,6 @@
 extends Node2D
 
-const NEXT_LEVEL_ID = 0
+export(int) var NEXT_LEVEL_ID = 0
 
 const DEFUSE_TIME = 5
 const RESTART_TIME = 3
@@ -15,6 +15,8 @@ var exploded = false
 var current_defuse_time = 0
 var current_restart_time = 0
 var current_next_time = 0
+
+var scene_changed = false
 
 
 func _ready():
@@ -51,12 +53,14 @@ func _process(delta):
 		if current_restart_time >= RESTART_TIME:
 			get_tree().reload_current_scene()
 	elif defused:
-		current_next_time += delta
-		if current_next_time >= NEXT_TIME:
-			if NEXT_LEVEL_ID != 0:
-				get_tree().change_scene("res://Scenes/Level"+str(NEXT_LEVEL_ID))
-			else:
-				pass
+		if not scene_changed:
+			current_next_time += delta
+			if current_next_time >= NEXT_TIME:
+				if NEXT_LEVEL_ID != 0:
+					get_tree().change_scene("res://Scenes/Level"+str(NEXT_LEVEL_ID)+".tscn")
+				else:
+					pass
+				scene_changed = true
 
 
 func explode():
