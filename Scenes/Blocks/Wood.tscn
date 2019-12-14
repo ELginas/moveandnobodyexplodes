@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Images/block4.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Wood.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15, 15 )
+
+[node name="Wood" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2( 1.25, 1.25 )
+input_pickable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
+[connection signal="mouse_entered" from="StaticBody2D" to="." method="_on_StaticBody2D_mouse_entered"]
+[connection signal="mouse_exited" from="StaticBody2D" to="." method="_on_StaticBody2D_mouse_exited"]
