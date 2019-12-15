@@ -7,12 +7,10 @@ var start_offset = Vector2()
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("interact_block"):
+	if Input.is_action_just_pressed("interact_block") and mouse_entered:
 		start_offset = get_global_mouse_position() - position
-	if Input.is_action_pressed("interact_block"):
-		if mouse_entered:
-			dragging = true
-	elif dragging:
+		dragging = true
+	if not Input.is_action_pressed("interact_block") and dragging:
 		dragging = false
 
 

@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/KillBarrier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tileset.res" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Bomb.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Blocks/Wood.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Blocks/Spikes.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Blocks/Steel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Images/background2.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/BombTimer.tscn" type="PackedScene" id=9]
+
+[node name="Level4" type="Node2D"]
+
+[node name="KillBarrier" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 504.66 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 40, 40 )
+format = 1
+tile_data = PoolIntArray( 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 327689, 0, 0, 327690, 0, 0, 327695, 0, 0, 327696, 0, 0, 393224, 0, 0, 393232, 0, 0, 393233, 0, 0, 458760, 0, 0, 458769, 0, 0, 524296, 0, 0, 589832, 0, 0, 589833, 1, 0, 589834, 1, 0, 589835, 0, 0, 589836, 1, 0, 589837, 1, 0, 589838, 0, 0, 589839, 1, 0, 589840, 1, 0, 589841, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 460, 320 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 320.482, 148.283 )
+current = true
+
+[node name="Bomb" parent="." instance=ExtResource( 4 )]
+position = Vector2( 700, 218 )
+NEXT_LEVEL_ID = 5
+
+[node name="Wood" parent="." instance=ExtResource( 5 )]
+position = Vector2( 700, 340 )
+
+[node name="Spikes" parent="." instance=ExtResource( 6 )]
+position = Vector2( 740, 340 )
+
+[node name="Spikes2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 740, 300 )
+rotation = 3.14159
+
+[node name="Steel" parent="." instance=ExtResource( 7 )]
+position = Vector2( 380, 180 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BombTimer" parent="CanvasLayer" instance=ExtResource( 9 )]

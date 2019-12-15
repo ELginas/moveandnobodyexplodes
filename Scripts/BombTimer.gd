@@ -1,10 +1,13 @@
 extends Label
 
+const CHECKMARK = preload("res://Scenes/Checkmark.tscn")
+
 const DEFUSED_COLOR = Color8(71, 232, 71)
 
 export(int) var bomb_seconds = 90
 
 var current_seconds
+var previous_seconds = 0
 
 var defused
 
@@ -33,6 +36,10 @@ func update_time():
 			min_time += 1
 			sec_time -= 60
 		
+		if previous_seconds != 0:
+			if floor(previous_seconds) > floor(current_seconds):
+				$BeepSound.play()
+		
 		if current_seconds <= 0:
 			explode()
 			return
@@ -54,12 +61,17 @@ func update_time():
 		var texty = str(min_time)+":"+sec_text
 		text = texty
 		get_tree().get_nodes_in_group("Bomb")[0].set_text(texty)
+		previous_seconds = current_seconds
 
 
 func defused():
 	defused = true
 	get_tree().get_nodes_in_group("Bomb")[0].set_text_color(DEFUSED_COLOR)
 	add_color_override("font_color", DEFUSED_COLOR)
+	
+	var checkmark = CHECKMARK.instance()
+	checkmark.play_anim()
+	get_parent().get_parent().add_child(checkmark)
 
 
 func explode():

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+export(bool) var afk_rule_on = true
+
 var starting_pos
 
 var isRight = false
@@ -25,8 +27,9 @@ func _ready():
 
 
 func _physics_process(delta):
-	if not bomb:
-		bomb = get_tree().get_nodes_in_group("Bomb")[0]
+	if afk_rule_on:
+		if not bomb:
+			bomb = get_tree().get_nodes_in_group("Bomb")[0]
 	
 	var move_dir = 0
 	if Input.is_action_pressed("ui_right"):
@@ -43,6 +46,7 @@ func _physics_process(delta):
 	var grounded = is_on_floor()
 	y_velo += GRAVITY
 	if grounded and Input.is_action_pressed("ui_up"):
+		$JumpSound.play()
 		y_velo = -JUMP_FORCE
 		if not moved:
 			moved = true
@@ -56,13 +60,14 @@ func _physics_process(delta):
 	if !isRight and move_dir > 0:
 		flip()
 	
-	if move_dir == 0 and grounded:
-		if moved:
-			if previous_pos == position:
-				if not (bomb.exploded or bomb.defused or bomb.defusing):
-					current_afk_time += delta
-					if current_afk_time >= AFK_TIME:
-						reset_pos()
+	if afk_rule_on:
+		if move_dir == 0 and grounded:
+			if moved:
+				if previous_pos == position:
+					if not (bomb.exploded or bomb.defused or bomb.defusing):
+						current_afk_time += delta
+						if current_afk_time >= AFK_TIME:
+							reset_pos()
 	
 	if grounded:
 		if move_dir == 0:
@@ -92,3 +97,4 @@ func reset_pos():
 	position = starting_pos
 	current_afk_time = 0
 	moved = false
+	$EliminatedSound.play()

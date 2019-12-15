@@ -5,6 +5,7 @@ const PLAY_SCENE = preload("res://Scenes/Level1.tscn")
 
 func play_game():
 	get_tree().change_scene_to(PLAY_SCENE)
+	$ClickSound.play()
 
 
 func exit_game():

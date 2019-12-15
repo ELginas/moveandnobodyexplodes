@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scripts/Bomb.gd" type="Script" id=1]
 [ext_resource path="res://Images/bomb.png" type="Texture" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://Images/explosion/tile022.png" type="Texture" id=28]
 [ext_resource path="res://Images/explosion/tile023.png" type="Texture" id=29]
 [ext_resource path="res://Images/explosion/tile024.png" type="Texture" id=30]
+[ext_resource path="res://Sounds/explosion.wav" type="AudioStream" id=31]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.5, 11 )
@@ -96,6 +97,9 @@ visible = false
 z_index = 5
 frames = SubResource( 4 )
 animation = "Explosion"
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 31 )
 [connection signal="mouse_entered" from="StaticBody2D" to="." method="_on_StaticBody2D_mouse_entered"]
 [connection signal="mouse_exited" from="StaticBody2D" to="." method="_on_StaticBody2D_mouse_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

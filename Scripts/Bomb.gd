@@ -70,6 +70,7 @@ func explode():
 	$Sprite.visible = false
 	$TimeText.visible = false
 	$Progress.visible = false
+	$ExplosionSound.play()
 
 
 func set_text(text):

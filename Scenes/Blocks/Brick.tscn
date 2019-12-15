@@ -3,7 +3,7 @@
 [ext_resource path="res://Images/brick.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15, 15 )
+extents = Vector2( 20, 20 )
 
 [node name="Brick" type="Sprite"]
 texture = ExtResource( 1 )
