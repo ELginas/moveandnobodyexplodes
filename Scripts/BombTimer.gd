@@ -75,9 +75,11 @@ func defused():
 
 
 func explode():
+	var bomb = get_tree().get_nodes_in_group("Bomb")[0]
+	var camera = get_tree().get_nodes_in_group("Camera")[0]
 	counted = true
 	var texty = "0:00"
 	text = texty
-	var bomb = get_tree().get_nodes_in_group("Bomb")[0]
 	bomb.set_text(texty)
 	bomb.explode()
+	camera.shake(1, 20, 20)

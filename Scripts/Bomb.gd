@@ -2,7 +2,7 @@ extends Node2D
 
 export(int) var NEXT_LEVEL_ID = 0
 
-const DEFUSE_TIME = 5
+const DEFUSE_TIME = 3
 const RESTART_TIME = 3
 const NEXT_TIME = 3
 

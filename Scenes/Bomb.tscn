@@ -94,6 +94,7 @@ nine_patch_stretch = true
 
 [node name="Explosion" type="AnimatedSprite" parent="."]
 visible = false
+scale = Vector2( 2, 2 )
 z_index = 5
 frames = SubResource( 4 )
 animation = "Explosion"

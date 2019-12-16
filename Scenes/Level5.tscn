@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/KillBarrier.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tileset.res" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Bomb.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Blocks/Spikes.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Blocks/Wood.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Blocks/Steel.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Images/background.png" type="Texture" id=8]
-[ext_resource path="res://Scenes/BombTimer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Bomb.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Blocks/Spikes.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Blocks/Wood.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Blocks/Steel.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Images/background.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/BombTimer.tscn" type="PackedScene" id=10]
 
 [node name="Level5" type="Node2D"]
 
@@ -24,57 +25,55 @@ tile_data = PoolIntArray( -196589, 0, 0, -196588, 0, 0, -196587, 0, 0, 524297, 0
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 500, 280 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 320.482, 148.283 )
-current = true
+[node name="Camera" parent="." instance=ExtResource( 4 )]
 
-[node name="Bomb" parent="." instance=ExtResource( 4 )]
+[node name="Bomb" parent="." instance=ExtResource( 5 )]
 position = Vector2( 820, -142.538 )
 NEXT_LEVEL_ID = 6
 
-[node name="Spikes" parent="." instance=ExtResource( 5 )]
+[node name="Spikes" parent="." instance=ExtResource( 6 )]
 position = Vector2( 340, 340 )
 
-[node name="Spikes2" parent="." instance=ExtResource( 5 )]
+[node name="Spikes2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 580, 340 )
 
-[node name="Wood" parent="." instance=ExtResource( 6 )]
+[node name="Wood" parent="." instance=ExtResource( 7 )]
 position = Vector2( 380, 380 )
 
-[node name="Wood10" parent="." instance=ExtResource( 6 )]
+[node name="Wood10" parent="." instance=ExtResource( 7 )]
 position = Vector2( 340, 420 )
 
-[node name="Wood11" parent="." instance=ExtResource( 6 )]
+[node name="Wood11" parent="." instance=ExtResource( 7 )]
 position = Vector2( 300, 380 )
 
-[node name="Wood2" parent="." instance=ExtResource( 6 )]
+[node name="Wood2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 420, 420 )
 
-[node name="Wood3" parent="." instance=ExtResource( 6 )]
+[node name="Wood3" parent="." instance=ExtResource( 7 )]
 position = Vector2( 420, 340 )
 
-[node name="Wood4" parent="." instance=ExtResource( 6 )]
+[node name="Wood4" parent="." instance=ExtResource( 7 )]
 position = Vector2( 460, 380 )
 
-[node name="Wood5" parent="." instance=ExtResource( 6 )]
+[node name="Wood5" parent="." instance=ExtResource( 7 )]
 position = Vector2( 500, 340 )
 
-[node name="Wood6" parent="." instance=ExtResource( 6 )]
+[node name="Wood6" parent="." instance=ExtResource( 7 )]
 position = Vector2( 500, 420 )
 
-[node name="Wood7" parent="." instance=ExtResource( 6 )]
+[node name="Wood7" parent="." instance=ExtResource( 7 )]
 position = Vector2( 540, 380 )
 
-[node name="Wood8" parent="." instance=ExtResource( 6 )]
+[node name="Wood8" parent="." instance=ExtResource( 7 )]
 position = Vector2( 580, 420 )
 
-[node name="Wood9" parent="." instance=ExtResource( 6 )]
+[node name="Wood9" parent="." instance=ExtResource( 7 )]
 position = Vector2( 620, 380 )
 
-[node name="Steel" parent="." instance=ExtResource( 7 )]
+[node name="Steel" parent="." instance=ExtResource( 8 )]
 position = Vector2( 340, 380 )
 
-[node name="Steel2" parent="." instance=ExtResource( 7 )]
+[node name="Steel2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 580, 380 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -84,10 +83,11 @@ layer = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 expand = true
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BombTimer" parent="CanvasLayer" instance=ExtResource( 9 )]
+[node name="BombTimer" parent="CanvasLayer" instance=ExtResource( 10 )]
+bomb_seconds = 30
